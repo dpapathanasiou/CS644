@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stddef.h>
 
+// copy of https://github.com/iafisher/cs644/blob/master/week1/switch.c
+
 enum LanguageCode
 {
   LANG_EN, // English
@@ -60,4 +62,6 @@ int main()
 {
   struct Language russian = make_language(LANG_RU);
   print_language(russian);
+
+  return 0;
 }

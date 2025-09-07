@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stddef.h>
 
-
-int main() {
+int main()
+{
     unsigned long s = sizeof(size_t);
     printf("sizeof size_t on my machine: %lu\n", s);
 
