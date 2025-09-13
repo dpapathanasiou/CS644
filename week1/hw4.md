@@ -6,3 +6,5 @@ $ ./hw4
 Code:	2
 (Noun Declensions, Verb Conjugations, Grammatical Gender) -> (True, True, True)
 ```
+
+*Correction:* Russian has all three, so the behavior is correct

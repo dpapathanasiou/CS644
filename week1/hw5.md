@@ -6,4 +6,6 @@ At the end of the loop, it returns the difference of the case match at the last 
 
 The only difference between the first and second functions in `Python/pystrcmp.c` is that the second only does not take `size_t` into account.
 
+*Correction:* the `size_t` pararmeter in the first function is intended to enable sub-string matches on a given prefix length.
+
 [^1] Pointer iteration on strings is described in [K&R Chapter 5 - Pointers](https://archive.org/details/cprogramminglang0000kern_2ed), with the [strlen](https://icarus.cs.weber.edu/~dab/cs1410/textbook/8.Strings/strlen.html) and [strcpy](https://web.eecs.umich.edu/gasm/tutorial/sectionstar3_8.html) examples in a similar "pointer arithmetic" style.
