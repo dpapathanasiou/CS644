@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
     if (PRINTON)
     {
-        printf("%ld: ", lines);
+        printf("[reader] %ld: ", lines);
     }
 
     while ((n = read(fd, buf, BUFSIZ)) > 0)
@@ -47,12 +47,12 @@ int main(int argc, char *argv[])
 
                 if (PRINTON)
                 {
-                    printf("%ld: ", lines);
+                    printf("[reader] %ld: ", lines);
                 }
             }
         }
     }
-    printf("\n\n[reader] file (%s) has %ld bytes -> %ld lines\n", argv[1], bytes, lines);
+    printf("\n[reader] file (%s) has %ld bytes -> %ld lines\n", argv[1], bytes, lines);
 
     int cl = close(fd);
     if (cl < 0)
