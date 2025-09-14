@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     if (argc < 2)
     {
-        printf("Usage:\n\n%s \"file pathname\" size\n", argv[0]);
+        printf("Usage:\n\n%s \"file pathname\"\n", argv[0]);
     }
 
     int fd = open(argv[1], O_RDONLY, 0);
