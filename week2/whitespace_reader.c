@@ -21,17 +21,16 @@ int main(int argc, char *argv[])
     char buf[buffer_size];
 
     ssize_t n;
-    size_t bytes, spaces;
+    size_t i, bytes, spaces;
 
     bytes = 0;
     spaces = 0;
     while ((n = read(fd, buf, buffer_size)) > 0)
     {
         bytes += n;
-        const char *p = (const char *)buf;
-        while (*p++ != '\0')
+        for (i = 0; i < n; i++)
         {
-            if (isspace(*p))
+            if (isspace(buf[i]))
             {
                 spaces += 1;
             }
