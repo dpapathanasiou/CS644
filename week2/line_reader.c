@@ -2,6 +2,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#define PRINTON 0 // 0 is false, anything else is true
+
 int main(int argc, char *argv[])
 {
     if (argc < 2)
@@ -24,14 +26,30 @@ int main(int argc, char *argv[])
 
     bytes = 0;
     lines = 0;
+
+    if (PRINTON)
+    {
+        printf("%ld: ", lines);
+    }
+
     while ((n = read(fd, buf, buffer_size)) > 0)
     {
         bytes += n;
         for (i = 0; i < n; i++)
         {
+            if (PRINTON)
+            {
+                printf("%c", buf[i]);
+            }
+
             if (buf[i] == '\n')
             {
                 lines += 1;
+
+                if (PRINTON)
+                {
+                    printf("%ld: ", lines);
+                }
             }
         }
     }
