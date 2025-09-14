@@ -38,4 +38,11 @@ $ sh chaos.sh
 [writer] wrote to file (foo.txt) 12 bytes -> Life is good
 [writer] wrote to file (foo.txt) 6 bytes -> muhaha
 [writer] wrote to file (foo.txt) 17 bytes -> oh no, not again!
+
+$ sh chaos.sh
+[writer] wrote to file (foo.txt) 6 bytes -> muhaha
+[writer] wrote to file (foo.txt) 12 bytes -> Life is good
+[writer] wrote to file (foo.txt) 17 bytes -> oh no, not again!
+[reader] 0: oh no, not again!d
+[reader] file (foo.txt) has 18 bytes -> 0 lines
 ```
