@@ -17,13 +17,15 @@ int main(int argc, char *argv[])
         return fd;
     }
 
-    char buf[BUFSIZ];
+    size_t buffer_size = 8192; // configurable alternative to built-in BUFSIZ
+    char buf[buffer_size];
+
     ssize_t n;
     size_t bytes, spaces;
 
     bytes = 0;
     spaces = 0;
-    while ((n = read(fd, buf, BUFSIZ)) > 0)
+    while ((n = read(fd, buf, buffer_size)) > 0)
     {
         bytes += n;
         const char *p = (const char *)buf;
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
             }
         }
     }
-    printf("File (%s) has %ld bytes (using %d BUFSIZ) -> %ld spaces\n", argv[1], bytes, BUFSIZ, spaces);
+    printf("File (%s) has %ld bytes (using %ld BUFSIZ) -> %ld spaces\n", argv[1], bytes, buffer_size, spaces);
 
     int cl = close(fd);
     if (cl < 0)
