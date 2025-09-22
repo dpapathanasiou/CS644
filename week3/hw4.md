@@ -1,0 +1,1 @@
+TODO: combine `sendfile` (good example [here](https://tldp.org/LDP/LG/issue91/tranter.html)) with the simple [getdents64.c](getdents64.c) implementation
