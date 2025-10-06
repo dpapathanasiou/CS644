@@ -60,22 +60,27 @@ void writer()
         handle_error("sem_open");
     }
 
-    r = sem_wait(sem);
-    if (r < 0)
+    printf("<enter> to increment current value, any other key to exit");
+    while (getchar() == '\n')
     {
-        handle_error("sem_wait");
-    }
+        // wait on the semaphore
+        r = sem_wait(sem);
+        if (r < 0)
+        {
+            handle_error("sem_wait");
+        }
 
-    // use the shared data structure,
-    // by incrementing its counter
-    s->counter += 1;
-    printf("(write) counter = %d\n", s->counter);
+        // use the shared data structure,
+        // by incrementing its counter
+        s->counter += 1;
+        printf("(write) counter = %d\n", s->counter);
 
-    // release the semaphore
-    r = sem_post(sem);
-    if (r < 0)
-    {
-        handle_error("sem_post");
+        // release the semaphore
+        r = sem_post(sem);
+        if (r < 0)
+        {
+            handle_error("sem_post");
+        }
     }
 
     // unlink the semaphore
@@ -83,6 +88,13 @@ void writer()
     if (r < 0)
     {
         handle_error("sem_unlink");
+    }
+
+    // unlink the shared memory
+    r = shm_unlink(SHARED_MEM);
+    if (r < 0)
+    {
+        handle_error("shm_unlink");
     }
 }
 
@@ -108,7 +120,7 @@ void reader()
         handle_error("close");
     }
 
-    sem_t *sem = sem_open(SEMAPHORE, 0);
+    sem_t *sem = sem_open(SEMAPHORE, O_EXCL, 0600, 1);
     if (sem == SEM_FAILED)
     {
         handle_error("sem_open");
@@ -132,23 +144,6 @@ void reader()
     }
 }
 
-void cleanup()
-{
-    // unlink the semaphore
-    int r = sem_unlink(SEMAPHORE);
-    if (r < 0)
-    {
-        handle_error("sem_unlink");
-    }
-
-    // unlink the shared memory
-    r = shm_unlink(SHARED_MEM);
-    if (r < 0)
-    {
-        handle_error("shm_unlink");
-    }
-}
-
 int main(int argc, char *argv[])
 {
     char usage[BUFSIZ];
@@ -169,17 +164,12 @@ int main(int argc, char *argv[])
     }
     else if (strcmp(argv[1], "write") == 0)
     {
-        printf("<enter> to increment current value, any other key to exit");
-        while (getchar() == '\n')
-        {
-            writer();
-        }
+        writer();
     }
     else
     {
         handle_error(usage);
     }
 
-    cleanup();
     exit(EXIT_SUCCESS);
 }
